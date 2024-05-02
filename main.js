@@ -7,6 +7,9 @@ const gridField = document.querySelector(".grid-field");
 let gridSize = document.querySelector("#size").value;
 const setSizeBtn = document.querySelector("#set-size");
 let isDrawing = false;
+const colorBtn = document.querySelectorAll(".color-btn");
+let color = "black";
+const errorText = document.querySelector(".error");
 
 //function to clear field
 function clearField() {
@@ -24,7 +27,7 @@ function createField(size) {
 
     square.addEventListener("mouseover", () => {
       if (isDrawing) {
-        square.style.backgroundColor = "black";
+        square.style.backgroundColor = color;
       }
     });
 
@@ -46,8 +49,12 @@ function createField(size) {
 setSizeBtn.addEventListener("click", () => {
   gridSize = document.querySelector("#size").value;
   if (gridSize < 2 || gridSize > 100) {
-    alert("You need to choose number between 2 and 100");
+    errorText.textContent = "You need to choose number between 2 and 100";
   } else {
+    errorText.textContent = "";
     createField(gridSize);
   }
 });
+
+//function to define a color of squares
+function colorSquare() {}
