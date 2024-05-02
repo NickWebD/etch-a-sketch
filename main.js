@@ -27,7 +27,11 @@ function createField(size) {
 
     square.addEventListener("mouseover", () => {
       if (isDrawing) {
-        square.style.backgroundColor = color;
+        let currentColor = color;
+        if (color === "random") {
+          currentColor = generateRandomColor();
+        }
+        square.style.backgroundColor = currentColor;
       }
     });
 
@@ -38,6 +42,7 @@ function createField(size) {
     square.addEventListener("mouseup", () => {
       isDrawing = false;
     });
+
     //square.classList.add("grid-field__item");
     square.style.flex = `1 0 calc(100% / ${gridSize})`;
     square.style.aspectRatio = "1/1";
@@ -48,6 +53,7 @@ function createField(size) {
 //define grid size using input
 setSizeBtn.addEventListener("click", () => {
   gridSize = document.querySelector("#size").value;
+
   if (gridSize < 2 || gridSize > 100) {
     errorText.textContent = "You need to choose number between 2 and 100";
   } else {
@@ -56,13 +62,19 @@ setSizeBtn.addEventListener("click", () => {
   }
 });
 
+//function to define a color of squares
+function colorSquare() {}
+
+//function to generate random color
+function generateRandomColor() {
+  return `hsl(${Math.random() * 360}, 100%, 50%)`;
+}
+
 //listener for color choosing buttons
 colorBtn.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     if (e.target.id === "eraser") {
       color = "white";
-    } else if (e.target.id === "random") {
-      color = `hsl(${Math.random() * 360}, 100%, 50%)`;
     } else {
       color = e.target.id;
     }
