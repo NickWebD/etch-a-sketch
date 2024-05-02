@@ -1,6 +1,6 @@
 //default grid size on page loaded
 document.addEventListener("DOMContentLoaded", () => {
-  createField(16);
+  createField();
 });
 
 const gridField = document.querySelector(".grid-field");
@@ -19,7 +19,7 @@ function clearField() {
 }
 
 //fuction to create field
-function createField(size) {
+function createField(size = 16) {
   clearField();
 
   for (let i = 0; i < size * size; i++) {
@@ -43,7 +43,7 @@ function createField(size) {
       isDrawing = false;
     });
 
-    //square.classList.add("grid-field__item");
+    square.classList.add("grid-field__item");
     square.style.flex = `1 0 calc(100% / ${gridSize})`;
     square.style.aspectRatio = "1/1";
     gridField.appendChild(square);
@@ -55,15 +55,12 @@ setSizeBtn.addEventListener("click", () => {
   gridSize = document.querySelector("#size").value;
 
   if (gridSize < 2 || gridSize > 100) {
-    errorText.textContent = "You need to choose number between 2 and 100";
+    errorText.textContent = "You need to choose number between 2 and 100.";
   } else {
     errorText.textContent = "";
     createField(gridSize);
   }
 });
-
-//function to define a color of squares
-function colorSquare() {}
 
 //function to generate random color
 function generateRandomColor() {
