@@ -56,5 +56,15 @@ setSizeBtn.addEventListener("click", () => {
   }
 });
 
-//function to define a color of squares
-function colorSquare() {}
+//listener for color choosing buttons
+colorBtn.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    if (e.target.id === "eraser") {
+      color = "white";
+    } else if (e.target.id === "random") {
+      color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    } else {
+      color = e.target.id;
+    }
+  });
+});
